@@ -193,8 +193,8 @@ void up()
     snake_coordinates[next_coordinates.first][next_coordinates.second]=1;
     gotoxy(next_coordinates.first,next_coordinates.second);
     printf("%c",2);
-    head_coordinates=next_coordinates;
     }
+    head_coordinates=next_coordinates;
 }
 void down()
 {
@@ -241,7 +241,7 @@ int main()
     generate_food();
     while(gameover==0)
     {
-        Sleep(1000);
+        Sleep(100);
         if(kbhit())
         {
             if(GetAsyncKeyState(VK_ESCAPE))
