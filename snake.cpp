@@ -16,8 +16,8 @@ COORD coord={0,0};
  void gotoxy(int x,int y)
  {
    coord.X=y;
- coord.Y=x;
- SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
+   coord.Y=x;
+   SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
  }
 void initialize_box()
 {
