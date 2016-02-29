@@ -1,0 +1,127 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define gc getchar
+#define ll long long
+#define v vector
+#define pr pair<int,int>
+#define sd second
+#define ft first
+#define pb push_back
+#define mp make_pair
+int a[22001];
+int fr()
+{
+    char ch;
+    int t=0,flag=0;
+    ch=gc();
+    while(ch<33)
+        ch=gc();
+    if(ch=='-')
+        {
+            ch=gc();
+            flag=1;
+        }
+    while(ch>33)
+    {
+        t=t*10+ch-'0';
+        ch=gc();
+    }
+    if(flag)
+        return -t;
+    else
+        return t;
+}
+class seg{
+int siz;
+int tree[100001];
+public:
+    seg(int n)
+    {
+        siz=n;
+    }
+int build(int l,int r,int pos)
+{
+    if(l==r)
+    {
+        tree[pos]=a[l];
+        return tree[pos];
+    }
+    int mid=(l+r)/2,lans,rans;
+    lans=build(l,mid,2*pos+1);
+    rans=build(mid+1,r,2*pos+2);
+    tree[pos]=lans&rans;
+    return tree[pos];
+}
+int query(int pos,int l,int r,int ql,int qr)
+{
+    if(qr<l||ql>r)
+        return -1;
+    else if(ql<=l&&qr>=r)
+    {
+        return tree[pos];
+    }
+    else
+    {
+        int lans;
+        int rans;
+        int mid=(l+r)/2;
+        lans=query(2*pos+1,l,mid,ql,qr);
+        rans=query(2*pos+2,mid+1,r,ql,qr);
+        return lans&rans;
+    }
+
+}
+};
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int i,j,k,n,t,ans,start,en;
+    t=fr();
+    while(t--)
+    {
+        n=fr();
+        k=fr();
+        for(i=0;i<n;i++)
+        {
+            a[i]=fr();
+        }
+        seg x(n-1);
+        x.build(0,n-1,0);
+        if(k>=n/2)
+        {
+            for(i=0;i<n-1;i++)
+            {
+                printf("%d ",x.query(0,0,n-1,0,n-1));
+            }
+            printf("%d",x.query(0,0,n-1,0,n-1));
+        }
+        else
+        {
+            for(i=0;i<n;i++)
+            {
+                start=i-k;
+                en=i+k;
+                if(start<0)
+                {
+                    ans=(x.query(0,0,n-1,n+(i-k),n-1));
+                    //printf("\n%d %d %d %d\n",ans,n+(i-k),n-1,i+k);
+                    ans=ans&(x.query(0,0,n-1,0,i+k));
+                }
+                else if(en>n-1)
+                {
+                    ans=x.query(0,0,n-1,i-k,n-1);
+                    ans=ans&x.query(0,0,n-1,0,i+k-n);
+                }
+                else
+                {
+                    ans=x.query(0,0,n-1,i-k,i+k);
+                }
+                if(i<n-1)
+                printf("%d ",ans);
+            }
+            printf("%d",ans);
+        }
+        printf("\n");
+    }
+    return 0;
+}
