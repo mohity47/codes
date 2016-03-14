@@ -7,6 +7,7 @@ using namespace std;
 #define sd second
 #define ft first
 #define pb push_back
+#defin mp make_pair
 int fr()
 {
     char ch;
