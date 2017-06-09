@@ -72,8 +72,6 @@ int main()
 
             Sleep(2000);
             //idm coordinates x=630 y=427
-            //system("cd C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Internet Download Manager & \"Internet Download Manager.lnk\"");
-            //system("cd "C:\\Program Files (x86)\\Internet Download Manager\\IDMan.exe"")
             MouseMove(630,427);
             LeftClick();
         }
