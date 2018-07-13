@@ -21,7 +21,7 @@ int lps[200005];
 void manacher(string text) {
 	int n,c=1,r=2,i=0,iMirror;
 	n=text.length();
-	n=2*n-1;
+	n=2*n+1;
 	lps[0]=0;
 	lps[1]=1;
 	for (int i=2;i<n; i++) {
@@ -48,7 +48,7 @@ int main(){
 
  	int i,j,k,n,t,s,x,y;
  	manacher("aababa");
- 	for(i=0;i<6;i++) {
+ 	for(i=0;i<11;i++) {
  		cout<<lps[i]<<" ";
  	}
 	return 0;
