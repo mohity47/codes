@@ -40,11 +40,16 @@ void init_sparse(int a[],int n) {
 }
 
 int query_sparse(int a[],int nodes[],int l,int r) {
-	int col = log(r-l+1)/log(2);
-	if(a[stable[l][col]] < a[stable[r-(1<<col)+1][col]]) {
-		return nodes[stable[l][col]];
-	}
-	return nodes[stable[r-(1<<col)+1][col]];
+    if(occur[l] > occur[r]) {
+        swap(l,r);
+    }
+    l = occur[l];
+    r = occur[r];
+    int col = log(r-l+1)/log(2);
+    if(level[stable[l][col]] < level[stable[r-(1<<col)+1][col]]) {
+        return nodes[stable[l][col]];
+    }
+    return nodes[stable[r-(1<<col)+1][col]];
 }
 
 v<v<int> > graph(100004);
