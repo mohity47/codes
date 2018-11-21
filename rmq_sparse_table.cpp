@@ -25,15 +25,15 @@ void init_sparse(int n) {
 	rep(i,n) {
 		stable[i][0] = a[i];
 	}
-	for(j=1;i<log(n);i++) {
+	for(j=1;(1<<j)<=n;j++) {
 		for(i=0;i<=n-(1<<j);i++) {
 			stable[i][j] = min(stable[i][j-1],stable[i+(1<<(j-1))][j-1]);
-		}	
+		}
 	}
 }
 
 int query_sparse(int l,int r) {
-	int col = log(r-l+1);
+	int col = log(r-l+1)/log(2);
 	return min(stable[l][col],stable[r-(1<<col)+1][col]);
 }
 
